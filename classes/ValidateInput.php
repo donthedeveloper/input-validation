@@ -3,7 +3,7 @@
 class ValidateInput {
   
   // returns array of passed(true) & failed(false) inputs
-  public function checkEmptyInput($inputArray, $requiredArray) {
+  public function validateEmptyInput($inputArray, $requiredArray) {
     
     $validatedInputs = array();
     
@@ -11,10 +11,10 @@ class ValidateInput {
       // if the current input being looped through is required
       if ($requiredArray[$inputName]) {
         if ( empty($inputValue) ) {
-          $validatedInputs[$inputName] = false;
+          $validatedInputs[$inputName] = FALSE;
         }
         else {
-          $validatedInputs[$inputName] = true;
+          $validatedInputs[$inputName] = TRUE;
         }
       }
     }
@@ -23,6 +23,17 @@ class ValidateInput {
     
   }
   
+  public function validateEmail($inputName) {
+    
+    $validateEmail = filter_input(INPUT_POST, $inputName, FILTER_VALIDATE_EMAIL);
+    
+    if ($validateEmail === FALSE) {
+      return FALSE;
+    }
+    else {
+      return TRUE;
+    }
+    
+  }
+  
 }
-
-?>
